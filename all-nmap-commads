@@ -1,0 +1,57 @@
+1. Basic Nmap commands
+Command	Use
+nmap --version	Nmap version check
+nmap -h	Help options
+nmap 127.0.0.1	Basic scan
+nmap -v 127.0.0.1	Detailed scan progress
+nmap -vv 127.0.0.1	More detailed progress
+nmap -F 127.0.0.1	Fast scan
+nmap -n 127.0.0.1	DNS lookup skip
+nmap -Pn 127.0.0.1	Host discovery skip; assume target is up
+
+2. Port scanning commands
+Command	Use
+nmap -p 22 127.0.0.1	Port 22 scan
+nmap -p 80 127.0.0.1	Port 80 scan
+nmap -p 443 127.0.0.1	Port 443 scan
+nmap -p 22,80,443 127.0.0.1	Multiple ports scan
+nmap -p 1-1000 127.0.0.1	Ports 1 to 1000
+nmap -p- 127.0.0.1	All TCP ports
+nmap --top-ports 20 127.0.0.1	Top 20 common ports
+nmap -p 80-100 127.0.0.1	Ports 80 to 100
+
+3. Service and OS detection
+Command	Use
+nmap -sV 127.0.0.1	Service version detection
+nmap -sV --version-light 127.0.0.1	Lighter version detection
+nmap -O 127.0.0.1	OS detection
+sudo nmap -O 127.0.0.1	OS detection with privileges
+sudo nmap -A 127.0.0.1	OS, version, scripts and traceroute
+nmap -sC 127.0.0.1	Default NSE scripts
+nmap -sT 127.0.0.1	TCP connect scan
+sudo nmap -sS 127.0.0.1	TCP SYN scan
+
+-A and -sC can run additional probes. Use them only on your own system or authorized lab.8
+
+4. Network discovery commands
+Command	Use
+ip a	Own IP address find
+ip route	Network route check
+nmap -sn 127.0.0.1	Host discovery
+nmap -sn 192.168.1.0/24	Local network devices discover
+nmap -sL 192.168.1.0/24	List target IP addresses
+nmap -R 127.0.0.1	Reverse DNS lookup
+nmap --traceroute 127.0.0.1	Network route trace
+
+Note: 192.168.1.0/24 is an example network. Ungaloda actual network range use pannunga.
+
+5. UDP scanning commands
+UDP scan-ku sudo use pannunga.
+Command	Use
+sudo nmap -sU 127.0.0.1	UDP scan
+sudo nmap -sU -p 53 127.0.0.1	UDP port 53 scan
+sudo nmap -sU -p 161 127.0.0.1	UDP port 161 scan
+sudo nmap -sU --top-ports 20 127.0.0.1	Top 20 UDP ports
+
+- UDP 53 → DNS
+- UDP 161 → SNMP
