@@ -47,6 +47,52 @@ Note: 192.168.1.0/24 is an example network. Ungaloda actual network range use pa
 
 5. UDP scanning commands
 UDP scan-ku sudo use pannunga.
+
+Hostname and DNS
+nmap -sL scanme.nmap.org
+nmap -R scanme.nmap.org
+nmap --dns-servers 8.8.8.8 scanme.nmap.org
+nmap -p 53 -sV 127.0.0.1
+
+
+scanme.nmap.org is Nmap's public test host. Follow its published usage restrictions.
+9. NSE scripts – Script engine
+nmap -sC 127.0.0.1
+nmap --script-help safe
+nmap --script-help http-title
+nmap --script-help banner
+nmap --script-help ssl-cert
+nmap --script-help ssh-hostkey
+nmap --script-help smb-protocols
+
+
+FTP enumeration
+Authorized lab target use pannunga.
+nmap -p 21 -sV TARGET
+nmap --script banner -p 21 TARGET
+nmap --script ftp-syst -p 21 TARGET
+nmap --script ftp-anon -p 21 TARGE
+
+HTTP enumeration
+nmap -p 80,443 -sV TARGET
+nmap --script http-title -p 80,443 TARGET
+nmap --script http-headers -p 80,443 TARGET
+nmap --script http-methods -p 80 TARGET
+nmap --script http-server-header -p 80 TARGET
+nmap --script http-robots.txt -p 80 TARGET
+
+
+Web server title, headers, allowed HTTP methods, robots.txt information inspect pannum.
+12. SSH enumeration
+nmap -p 22 -sV TARGET
+nmap --script ssh-hostkey -p 22 TARGET
+nmap --script ssh2-enum-algos -p 22 TARGET
+
+
+SSH algorithms and host key information collect pannum.
+
+
+
 Command	Use
 sudo nmap -sU 127.0.0.1	UDP scan
 sudo nmap -sU -p 53 127.0.0.1	UDP port 53 scan
@@ -55,3 +101,120 @@ sudo nmap -sU --top-ports 20 127.0.0.1	Top 20 UDP ports
 
 - UDP 53 → DNS
 - UDP 161 → SNMP
+
+Scan results file-la save panna useful-ah irukkum.
+nmap -oN scan.txt 127.0.0.1
+
+Normal output save pannum.
+nmap -oX scan.xml 127.0.0.1
+
+XML format-la save pannum.
+nmap -oG scan.gnmap 127.0.0.1
+
+Grepable output save pannum.
+nmap -oA myscan 127.0.0.1
+
+6.Timing and performance
+Command	Use
+nmap -T0 127.0.0.1	Very slow scan
+nmap -T1 127.0.0.1	Slow scan
+nmap -T2 127.0.0.1	Polite timing
+nmap -T3 127.0.0.1	Normal timing
+nmap -T4 127.0.0.1	Faster scan
+nmap -T5 127.0.0.1	Very aggressive timing
+
+
+Option	Meaning
+-sS	SYN scan
+-sT	TCP connect scan
+-sU	UDP scan
+-sV	Service version
+-O	OS detection
+-A	Aggressive detection
+-p	Port selection
+-F	Fast scan
+-Pn	Skip host discovery
+-sn	Host discovery only
+-n	Skip DNS resolution
+-sC	Default scripts
+-oN	Save normal output
+-oA	Save all main output formats
+-T4	Faster timing
+
+
+
+SMB service check
+SMB commonly ports 139 and 445 use pannum.
+nmap -p 139,445 -sV 192.168.56.101
+
+
+SMB protocol information:
+nmap --script smb-protocols -p 445 192.168.56.101
+
+
+SMB operating system information:
+nmap --script smb-os-discovery -p 445 192.168.56.101
+
+
+Save your scan report
+nmap -sV -oN metasploitable-report.txt 192.168.56.101
+
+
+Report save aana file view panna:
+cat metasploitable-report.txt
+
+
+Final lab challenge
+Indha commands run panni results note pannunga.
+nmap -p 21,22,80,139,445 192.168.56.101
+
+
+nmap -sV -p 21,22,80,139,445 192.168.56.101
+
+
+nmap --script banner -p 21,22,80,139,445 192.168.56.101
+
+TCP scan types
+nmap -sT 127.0.0.1
+sudo nmap -sS 127.0.0.1
+sudo nmap -sA 127.0.0.1
+sudo nmap -sW 127.0.0.1
+sudo nmap -sN 127.0.0.1
+sudo nmap -sF 127.0.0.1
+sudo nmap -sX 127.0.0.1
+
+
+- -sT TCP connect scan
+- -sS SYN scan
+- -sA ACK scan
+- -sW Window scan
+- -sN NULL scan
+- -sF FIN scan
+- -sX Xmas scan
+
+SMB enumeration
+nmap -p 139,445 -sV TARGET
+nmap --script smb-protocols -p 445 TARGET
+nmap --script smb-os-discovery -p 445 TARGET
+nmap --script smb-security-mode -p 445 TARGET
+
+SMB protocol version and security configuration inspect pannum.
+
+
+14. MySQL and other services
+nmap -p 3306 -sV TARGET
+nmap -p 5432 -sV TARGET
+nmap -p 1433 -sV TARGET
+nmap -p 3389 -sV TARGET
+nmap -p 5900 -sV TARGET
+nmap -p 8080 -sV TARGET
+
+Packet analysis and scan details
+nmap --reason 127.0.0.1
+nmap --packet-trace 127.0.0.1
+nmap --stats-every 10s 127.0.0.1
+nmap --host-timeout 5m 127.0.0.1
+nmap --scan-delay 1s 127.0.0.1
+nmap --max-retries 2 127.0.0.1
+
+
